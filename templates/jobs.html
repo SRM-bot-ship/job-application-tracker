@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Jobs - Job Tracker{% endblock %}
+
+{% block content %}
+<h2>Jobs</h2>
+
+<form method="POST">
+    <select name="company_id">
+        {% for company in companies %}
+            <option value="{{ company.company_id }}">{{ company.company_name }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="text" name="title" placeholder="Job Title" required><br>
+    <input type="text" name="skills" placeholder="Skills (comma separated)" required><br>
+    <button type="submit">Add Job</button>
+</form>
+
+<h3>Existing Jobs</h3>
+<ul>
+    {% for job in jobs %}
+        <li>{{ job.job_title }} - {{ job.company_name }} (Skills: {{ job.requirements }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

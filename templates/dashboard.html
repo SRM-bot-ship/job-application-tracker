@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Job Tracker{% endblock %}
+
+{% block content %}
+<h2>Welcome to the Dashboard</h2>
+<p>Search overview and quick statistics.</p>
+
+<div>
+    <h3>Companies: {{ apps_count }}</h3>
+    <h3>Jobs: {{ jobs_count }}</h3>
+    <h3>Status Stats:</h3>
+    <ul>
+        {% for status in status_stats %}
+            <li>{{ status.status }}: {{ status.count }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

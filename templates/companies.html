@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Companies - Job Tracker{% endblock %}
+
+{% block content %}
+<h2>Companies</h2>
+
+<form method="POST">
+    <input type="text" name="name" placeholder="Company Name" required><br>
+    <input type="text" name="industry" placeholder="Industry" required><br>
+    <input type="text" name="website" placeholder="Website"><br>
+    <input type="text" name="city" placeholder="City" required><br>
+    <input type="text" name="state" placeholder="State" required><br>
+    <textarea name="notes" placeholder="Notes"></textarea><br>
+    <button type="submit">Add Company</button>
+</form>
+
+<h3>Existing Companies</h3>
+<ul>
+    {% for company in companies %}
+        <li>{{ company.company_name }} ({{ company.industry }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

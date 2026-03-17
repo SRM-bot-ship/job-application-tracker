@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Contacts - Job Tracker{% endblock %}
+
+{% block content %}
+<h2>Contacts</h2>
+
+<!-- Form to add a new contact -->
+<h3>Add New Contact</h3>
+<form method="POST">
+    <input type="text" name="name" placeholder="Contact Name" required><br>
+    <input type="email" name="email" placeholder="Contact Email" required><br>
+    <input type="text" name="phone" placeholder="Contact Phone" required><br>
+    <textarea name="notes" placeholder="Additional Notes"></textarea><br>
+    <button type="submit">Add Contact</button>
+</form>
+
+<h3>Contacts List</h3>
+<ul>
+    {% for contact in contacts %}
+        <li>{{ contact.name }} - {{ contact.email }} - {{ contact.phone }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

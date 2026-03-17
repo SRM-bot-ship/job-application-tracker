@@ -1,0 +1,80 @@
+/* Base styles for body and page layout */
+body {
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+/* Container for the dashboard content */
+.dashboard-header {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Flexbox layout for the statistics grid */
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+/* Styling individual stat cards */
+.stat-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+}
+
+.stat-card h3 {
+    font-size: 32px;
+    margin: 0;
+}
+
+.stat-card p {
+    font-size: 16px;
+    color: #7f8c8d;
+}
+
+/* Styling for quick actions (buttons) */
+.quick-links {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.quick-links h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links li {
+    margin-bottom: 10px;
+}
+
+.quick-links a {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.quick-links a:hover {
+    background-color: #2980b9;
+}

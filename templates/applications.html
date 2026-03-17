@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Applications - Job Tracker{% endblock %}
+
+{% block content %}
+<h2>Applications</h2>
+
+<form method="POST">
+    <select name="job_id">
+        {% for job in jobs %}
+            <option value="{{ job.job_id }}">{{ job.job_title }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="date" name="date" required><br>
+    <select name="status">
+        <option value="Applied">Applied</option>
+        <option value="Interview">Interview</option>
+        <option value="Rejected">Rejected</option>
+    </select><br>
+    <button type="submit">Add Application</button>
+</form>
+
+<h3>Applications List</h3>
+<ul>
+    {% for application in applications %}
+        <li>{{ application.job_title }} - {{ application.status }} (Date: {{ application.application_date }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}
