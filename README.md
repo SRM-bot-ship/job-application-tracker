@@ -1,7 +1,7 @@
 # Job-Application-Tracker
 A web application to help track job applications during the job
 search process.
-## Features (Coming Soon)
+## Features
 - Track companies and job listings
 - Record application submissions
 - Manage interview schedules
