@@ -6,7 +6,8 @@
 <h2>Applications</h2>
 
 <form method="POST">
-    <select name="job_id">
+    <select name="job_id" required>
+        <option value="">-- Select Job --</option>
         {% for job in jobs %}
             <option value="{{ job.job_id }}">{{ job.job_title }}</option>
         {% endfor %}
@@ -15,15 +16,43 @@
     <select name="status">
         <option value="Applied">Applied</option>
         <option value="Interview">Interview</option>
+        <option value="Offer">Offer</option>
         <option value="Rejected">Rejected</option>
     </select><br>
     <button type="submit">Add Application</button>
 </form>
 
 <h3>Applications List</h3>
-<ul>
-    {% for application in applications %}
-        <li>{{ application.job_title }} - {{ application.status }} (Date: {{ application.application_date }})</li>
-    {% endfor %}
-</ul>
+<table border="1" style="width:100%; border-collapse: collapse; text-align: left;">
+    <thead>
+        <tr>
+            <th>Job Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for application in applications %}
+        <tr>
+            <td>{{ application.job_title }}</td>
+            <td>{{ application.application_date }}</td>
+            <td>
+                <form action="{{ url_for('update_app_status', id=application.application_id) }}" method="POST" style="display:inline;">
+                    <select name="status" onchange="this.form.submit()">
+                        <option value="Applied" {% if application.status == 'Applied' %}selected{% endif %}>Applied</option>
+                        <option value="Interview" {% if application.status == 'Interview' %}selected{% endif %}>Interview</option>
+                        <option value="Offer" {% if application.status == 'Offer' %}selected{% endif %}>Offer</option>
+                        <option value="Rejected" {% if application.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+                    </select>
+                </form>
+            </td>
+            <td>
+                <a href="{{ url_for('delete_application', id=application.application_id) }}" 
+                   onclick="return confirm('Delete this application record?')" style="color: red;">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

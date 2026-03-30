@@ -6,7 +6,8 @@
 <h2>Jobs</h2>
 
 <form method="POST">
-    <select name="company_id">
+    <select name="company_id" required>
+        <option value="">-- Select Company --</option>
         {% for company in companies %}
             <option value="{{ company.company_id }}">{{ company.company_name }}</option>
         {% endfor %}
@@ -17,9 +18,28 @@
 </form>
 
 <h3>Existing Jobs</h3>
-<ul>
-    {% for job in jobs %}
-        <li>{{ job.job_title }} - {{ job.company_name }} (Skills: {{ job.requirements }})</li>
-    {% endfor %}
-</ul>
+<table border="1" style="width:100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Requirements</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.job_title }}</td>
+            <td>{{ job.company_name }}</td>
+            <td>{{ job.requirements }}</td>
+            <td>
+                <a href="{{ url_for('delete_job', id=job.job_id) }}" 
+                   onclick="return confirm('Are you sure? This will remove the job and related applications.')" 
+                   style="color: red;">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

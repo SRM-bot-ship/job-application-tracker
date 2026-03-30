@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-
-{% block title %}Companies - Job Tracker{% endblock %}
+{% block title %}Companies{% endblock %}
 
 {% block content %}
-<h2>Companies</h2>
+<h2>Manage Companies</h2>
 
 <form method="POST">
     <input type="text" name="name" placeholder="Company Name" required><br>
@@ -15,10 +14,49 @@
     <button type="submit">Add Company</button>
 </form>
 
+<hr>
+
 <h3>Existing Companies</h3>
-<ul>
-    {% for company in companies %}
-        <li>{{ company.company_name }} ({{ company.industry }})</li>
-    {% endfor %}
-</ul>
+<table border="1" style="width:100%; border-collapse: collapse; text-align: left;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Industry</th>
+            <th>Website</th>
+            <th>Location (City, State)</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for company in companies %}
+        <tr>
+            <form action="{{ url_for('edit_company', id=company.company_id) }}" method="POST">
+                <td>
+                    <input type="text" name="name" value="{{ company.company_name }}" required>
+                </td>
+                <td>
+                    <input type="text" name="industry" value="{{ company.industry }}" required>
+                </td>
+                <td>
+                    <input type="text" name="website" value="{{ company.website }}">
+                </td>
+                <td>
+                    <input type="text" name="city" value="{{ company.city }}" style="width: 80px;" required>, 
+                    <input type="text" name="state" value="{{ company.state }}" style="width: 40px;" required>
+                </td>
+                <td>
+                    <textarea name="notes" rows="1">{{ company.notes }}</textarea>
+                </td>
+                <td>
+                    <button type="submit" style="color: blue; cursor: pointer; font-weight: bold;">Save</button> | 
+                    <a href="{{ url_for('delete_company', id=company.company_id) }}" 
+                       onclick="return confirm('Delete this company?')" 
+                       style="color: red; text-decoration: none;">Delete</a>
+                </td>
+            </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
